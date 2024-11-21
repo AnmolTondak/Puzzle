@@ -10,8 +10,14 @@ let imageURL = "";
 imageUpload.addEventListener("change", (event) => {
   const file = event.target.files[0];
   if (file) {
-    imageURL = URL.createObjectURL(file);
-    createPuzzle();
+    const reader = new FileReader();
+
+    // On file load, set the image URL and create the puzzle
+    reader.onload = function (e) {
+      imageURL = e.target.result;
+      createPuzzle();
+    };
+    reader.readAsDataURL(file);
   }
 });
 
