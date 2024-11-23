@@ -1,6 +1,8 @@
 const imageUpload = document.getElementById("imageUpload");
 const puzzleContainer = document.getElementById("puzzleContainer");
 const scatterButton = document.getElementById("scatterButton");
+const previewImage = document.getElementById("previewImage");
+const solveMessage = document.getElementById("solveMessage");
 
 let originalOrder = [];
 let pieces = [];
@@ -15,6 +17,7 @@ imageUpload.addEventListener("change", (event) => {
     // On file load, set the image URL and create the puzzle
     reader.onload = function (e) {
       imageURL = e.target.result;
+      previewImage.src = imageURL; // Set the correct image preview
       createPuzzle();
     };
     reader.readAsDataURL(file);
@@ -31,6 +34,7 @@ function createPuzzle() {
   puzzleContainer.innerHTML = "";
   pieces = [];
   originalOrder = [];
+  solveMessage.style.display = "none"; // Hide solved message
   const gridSize = 2;
 
   for (let row = 0; row < gridSize; row++) {
@@ -92,7 +96,13 @@ function swapPieces(piece1, piece2) {
 function checkPuzzleSolved() {
   const currentOrder = pieces.map((p) => p.dataset.position);
   if (JSON.stringify(currentOrder) === JSON.stringify(originalOrder)) {
-    alert("Puzzle Solved! You can scatter again!");
+    solveMessage.style.display = "block"; // Show solved message
+
+    // Scatter puzzle after 2 seconds
+    setTimeout(() => {
+      solveMessage.style.display = "none"; // Hide the solved message
+      scatterPuzzle();
+    }, 2000); // Adjust delay as needed
   }
 }
 
