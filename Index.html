@@ -9,15 +9,24 @@
 <body>
   <div class="container">
     <h1>2x2 Puzzle Game</h1>
-    
+
     <!-- Image Upload Input -->
     <input type="file" id="imageUpload" accept="image/*">
     
     <!-- Scatter Button -->
     <button id="scatterButton">Scatter Pieces</button>
     
+    <!-- Correct Image Preview -->
+    <div class="preview-container">
+      <p>Correct Image Preview:</p>
+      <img id="previewImage" alt="Correct Image Preview" />
+    </div>
+    
     <!-- Puzzle Container -->
     <div class="puzzle-container" id="puzzleContainer"></div>
+
+    <!-- Solve Message -->
+    <div id="solveMessage">🎉 Puzzle Solved! 🎉</div>
   </div>
   
   <script src="script.js"></script>
